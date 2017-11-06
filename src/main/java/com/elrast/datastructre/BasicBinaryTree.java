@@ -134,7 +134,12 @@ public class BasicBinaryTree<T extends Comparable<T>> {
         }
     }
 
-    private class Node {
+    public Node getRoot() {
+        return root;
+    }
+
+    public class Node {
+
         private T item;
         private Node parent;
         private Node left;
@@ -170,5 +175,10 @@ public class BasicBinaryTree<T extends Comparable<T>> {
         public void setRight(Node right) {
             this.right = right;
         }
+
+        public T getItem() {
+            return item;
+        }
+
     }
 }
