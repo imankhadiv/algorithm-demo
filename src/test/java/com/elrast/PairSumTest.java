@@ -52,6 +52,21 @@ public class PairSumTest {
     @Test
     public void shouldFindPairForRandomArray() throws Exception {
 
+        for (int i = 0 ; i < 100000; i++) {
+            System.out.println(i);
+        }
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 1000000000; i++) {
+                    System.out.println("...");
+                }
+            }
+        });
+        thread.setName("PixelGoogle");
+        thread.start();
+        thread.run();
+
         int[] nums = {6, 2, 4, 4};
         int sum = 8;
         assertTrue(pairSum.findPairForRandomArray(nums, sum));
