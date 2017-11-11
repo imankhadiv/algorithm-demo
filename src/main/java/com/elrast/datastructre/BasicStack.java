@@ -1,7 +1,5 @@
 package com.elrast.datastructre;
 
-import java.util.Stack;
-
 public class BasicStack<T> {
 
     private T[] data;
@@ -45,9 +43,5 @@ public class BasicStack<T> {
             }
         }
         throw new IllegalArgumentException("Can not find item on the stack" + item);
-    }
-
-    public int size() {
-        return stackPointer;
     }
 }
