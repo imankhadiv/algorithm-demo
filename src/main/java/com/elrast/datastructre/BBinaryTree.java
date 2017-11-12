@@ -178,26 +178,59 @@ public class BBinaryTree<T extends Comparable<T>> {
         b.add(31);
         b.add(9);
 
-        List<Integer> list = new ArrayList<>();
-        System.out.println(b.postOrder(b.root, list, 0));
+
+        List<Integer> postOrderList = new ArrayList<>();
+        // System.out.println(b.postOrder(b.root, list, 0));
+        System.out.println("Printing postOrder...");
+        System.out.println(b.postOrder(b.root, postOrderList));
+        //System.out.println(b.postOrder(b.root, list));
+        System.out.println("Printing preorder...");
+        List<Integer> preOrderList = new ArrayList<>();
+        System.out.println(b.preOrder(b.root, preOrderList));
+        List<Integer> inOrderList = new ArrayList<>();
+        System.out.println(b.inOrder(b.root, inOrderList));
+
+
     }
 
-    public List postOrder(Node root, List<Integer> list, int ca) {
+    public List postOrder(Node root, List<Integer> list) {
         if (root != null) {
-            postOrder(root.left, list, ++ca);
-            postOrder(root.right, list, ++ca);
+            postOrder(root.left, list);
+            postOrder(root.right, list);
             list.add((Integer) root.item);
-            return list;
         }
         return list;
     }
 
-    public int depthCounter(Node root, Integer ca) {
+    public List preOrder(Node root, List<Integer> list) {
+
         if (root != null) {
-            depthCounter(root.left, ca++);
-            depthCounter(root.right, ca++);
-            return --ca;
+            list.add((Integer) root.item);
+            preOrder(root.getLeft(), list);
+            preOrder(root.getRight(), list);
         }
-        return ca;
+        return list;
     }
+
+    public List inOrder(Node root, List<Integer> list) {
+        if (root != null) {
+            inOrder(root.getLeft(), list);
+            list.add((Integer) root.getItem());
+            inOrder(root.getRight(), list);
+        }
+        return list;
+    }
+
+    public int findHeight(Node root) {
+        int leftHeight = -1;
+        int rightHeight = -1;
+        int height = 0;
+        if (root == null) {
+            return -1;
+        }
+        leftHeight = findHeight(root.getLeft());
+        rightHeight = findHeight(root.getRight());
+        return Integer.max(leftHeight, rightHeight) + 1;
+    }
+
 }
