@@ -130,6 +130,25 @@ public class Sorting {
         return result;
     }
 
+    public int[] insertionSort(int[] input) {
+
+        if (input.length <= 1) {
+            return input;
+        }
+        int unsorted = 1;
+        while (unsorted < input.length) {
+
+            int i = unsorted - 1;
+            int hold = input[unsorted];
+            while (i >= 0 && input[i] > hold) {
+                input[i + 1] = input[i--];
+            }
+            input[i + 1] = hold;
+            unsorted++;
+        }
+        return input;
+    }
+
 }
 
 

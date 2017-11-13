@@ -54,4 +54,12 @@ public class SortingTest {
         assertArrayEquals(sorted, result);
     }
 
+    @Test
+    public void insertionSort() {
+
+        int[] sorted = new int[]{0, 2, 5, 18, 33};
+        int[] result = sorting.insertionSort(input);
+        assertArrayEquals(sorted, result);
+    }
+
 }
