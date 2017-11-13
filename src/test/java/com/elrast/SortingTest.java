@@ -16,14 +16,14 @@ public class SortingTest {
     @Before
     public void setUp() {
         sorting = new Sorting();
-        input = new int[]{18, 2, 0, 5};
+        input = new int[]{18, 2, 0, 5, 33};
 
     }
 
     @Test
     public void testSort() {
 
-        int[] sorted = new int[]{0, 2, 5, 18};
+        int[] sorted = new int[]{0, 2, 5, 18, 33};
         int[] result = sorting.sort(input);
         assertTrue(Arrays.equals(sorted, result));
 
@@ -32,7 +32,7 @@ public class SortingTest {
     @Test
     public void testBubbleSort() {
 
-        int[] sorted = new int[]{0, 2, 5, 18};
+        int[] sorted = new int[]{0, 2, 5, 18, 33};
         int[] result = sorting.bubbleSort(input);
         assertTrue(Arrays.equals(sorted, result));
 
@@ -41,8 +41,16 @@ public class SortingTest {
     @Test
     public void mergeSortTest() {
 
-        int[] sorted = new int[]{0, 2, 5, 18};
+        int[] sorted = new int[]{0, 2, 5, 18, 33};
         int[] result = sorting.mergeSort(input);
+        assertArrayEquals(sorted, result);
+    }
+
+    @Test
+    public void quickSort() {
+
+        int[] sorted = new int[]{0, 2, 5, 18, 33};
+        int[] result = sorting.quickSort(input);
         assertArrayEquals(sorted, result);
     }
 

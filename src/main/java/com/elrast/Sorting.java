@@ -97,6 +97,39 @@ public class Sorting {
         return result;
 
     }
+
+    public int[] quickSort(int[] input) {
+
+        if (input.length <= 1) {
+            return input;
+        }
+        int pivotIndex = input.length / 2;
+        int pivotVal = input[pivotIndex];
+        for (int i = 0; i < input.length; i++) {
+            if ((input[i] < pivotVal && i > pivotIndex) || (input[i] > pivotVal && i < pivotIndex)) {
+                int tmp = input[i];
+                input[i] = pivotVal;
+                input[pivotIndex] = tmp;
+                pivotIndex = i;
+            }
+        }
+        int[] less = Arrays.copyOfRange(input, 0, pivotIndex);
+        int[] greater = Arrays.copyOfRange(input, pivotIndex + 1, input.length);
+        return concatenate(quickSort(less), pivotVal, quickSort(greater));
+    }
+
+    private int[] concatenate(int[] less, int pivot, int[] greater) {
+        int[] result = new int[less.length + 1 + greater.length];
+        for (int i = 0; i < less.length; i++) {
+            result[i] = less[i];
+        }
+        result[less.length] = pivot;
+        for (int i = 0; i < greater.length; i++) {
+            result[i + less.length + 1] = greater[i];
+        }
+        return result;
+    }
+
 }
 
 
