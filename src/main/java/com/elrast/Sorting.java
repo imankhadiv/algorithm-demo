@@ -149,6 +149,30 @@ public class Sorting {
         return input;
     }
 
+    public int[] shellSort(int[] input) {
+
+        if (input.length <= 1) {
+            return input;
+        }
+        int gap = input.length / 2;
+        while (gap != 0) {
+            int current = gap;
+            while (current < input.length) {
+                int i = current - gap;
+                int hold = input[current];
+
+                while (i >= 0 && input[i] > hold) {
+                    input[i + gap] = input[i];
+                    i -= gap;
+                }
+                input[i + gap] = hold;
+                current += 1;
+            }
+            gap /= 2;
+        }
+        return input;
+    }
+
 }
 
 

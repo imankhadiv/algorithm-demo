@@ -61,5 +61,12 @@ public class SortingTest {
         int[] result = sorting.insertionSort(input);
         assertArrayEquals(sorted, result);
     }
+    @Test
+    public void shellSortTest() {
+
+        int[] sorted = new int[]{0, 2, 5, 18, 33};
+        int[] result = sorting.shellSort(input);
+        assertArrayEquals(sorted, result);
+    }
 
 }
