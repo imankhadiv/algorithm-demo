@@ -1,9 +1,7 @@
 package com.elrast;
 
-import com.sun.source.tree.AssertTree;
 import org.junit.Before;
 import org.junit.Test;
-import sun.jvm.hotspot.utilities.Assert;
 
 import static org.junit.Assert.*;
 
@@ -33,15 +31,76 @@ public class NumericTest {
         assertFalse(numeric.isPrimeNumber(4));
 
 
-
     }
+
     @Test
-    public void testIsPrimeSqrt(){
+    public void testIsPrimeSqrt() {
+
+        assertTrue(numeric.isPrimeNumber(2));
+        assertTrue(numeric.isPrimeNumber(3));
+        assertTrue(numeric.isPrimeNumber(5));
+        assertTrue(numeric.isPrimeNumber(1));
+        assertFalse(numeric.isPrimeNumber(400));
+    }
+
+    @Test
+    public void testIsPrime2() {
 
         assertTrue(numeric.isPrimeNumber(2));
         assertTrue(numeric.isPrimeNumber(3));
         assertTrue(numeric.isPrimeNumber(5));
         assertTrue(numeric.isPrimeNumber(1));
         assertFalse(numeric.isPrimeNumber(4));
+    }
+
+    @Test
+    public void testIsPrimeSqrt2() {
+
+        assertTrue(numeric.isPrimeNumber(2));
+        assertTrue(numeric.isPrimeNumber(3));
+        assertTrue(numeric.isPrimeNumber(5));
+        assertTrue(numeric.isPrimeNumber(1));
+        assertFalse(numeric.isPrimeNumber(4));
+    }
+
+    @Test
+    public void convertToBaseTest() {
+
+        String result = "1010";
+        assertEquals(result, numeric.convertToBase2(10, 2));
+        assertEquals("1011", numeric.convertToBase2(11, 2));
+
+    }
+
+    @Test
+    public void findGreatestCommonDenominatorTest() {
+
+        assertEquals(3, numeric.findTheGreatestCommonDenominator(3, 15));
+        assertEquals(3, numeric.findTheGreatestCommonDenominator(9, 15));
+        assertEquals(5, numeric.findTheGreatestCommonDenominator(10, 5));
+        assertEquals(2, numeric.findTheGreatestCommonDenominator(10, 18));
+        assertEquals(1, numeric.findTheGreatestCommonDenominator(10, 11));
+        assertEquals(10, numeric.findTheGreatestCommonDenominator(10, 100));
+
+
+    }
+
+    @Test
+    public void findGCDTest() {
+
+        assertEquals(3, numeric.gcd(3, 15));
+        assertEquals(3, numeric.gcd(9, 15));
+        assertEquals(5, numeric.gcd(10, 5));
+        assertEquals(2, numeric.gcd(10, 18));
+        assertEquals(1, numeric.gcd(10, 11));
+        assertEquals(10, numeric.gcd(10, 100));
+    }
+
+    @Test
+    public void calculateFactorialTest() {
+
+        assertEquals(1, numeric.factorial(1));
+        assertEquals(2, numeric.factorial(2));
+        assertEquals(6, numeric.factorial(3));
     }
 }
