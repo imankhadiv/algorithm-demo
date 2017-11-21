@@ -3,6 +3,7 @@ package com.elrast;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Stack;
 
 public class Strings {
 
@@ -113,6 +114,80 @@ public class Strings {
             index++;
         }
         return 0;
+    }
+
+
+    // Function to print all substring
+    public static void SubString(String str, int n) {
+        for (int i = 0; i < n; i++)
+            for (int j = i + 1; j <= n; j++)
+
+                // Please refer below article for details
+                // of substr in Java
+                // http://www.geeksforgeeks.org/java-lang-string-substring-java/
+                System.out.println(str.substring(i, j));
+    }
+
+
+    public String reverseVowels(String input) {
+
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+            updateStackWithWovels(stack, ch, null, 0);
+        }
+        StringBuilder sb = new StringBuilder(input);
+
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+            sb = updateStackWithWovels(stack, ch, sb, i);
+
+        }
+        return sb.toString();
+
+    }
+
+    private StringBuilder updateStackWithWovels(Stack<Character> stack, char ch, StringBuilder sb, int idx) {
+        switch (ch) {
+            case 'a':
+            case 'e':
+            case 'i':
+            case 'o':
+                if (sb != null) {
+                    sb.setCharAt(idx, stack.pop());
+                } else {
+                    stack.push(ch);
+                }
+                break;
+
+        }
+        return sb;
+    }
+
+    public String reverseVowelsWithTwoPointer(String s) {
+        if (s == null || s.length() == 0) return s;
+        String vowels = "aeiouAEIOU";
+        char[] chars = s.toCharArray();
+        int start = 0;
+        int end = s.length() - 1;
+        while (start < end) {
+
+            while (start < end && !vowels.contains(chars[start] + "")) {
+                start++;
+            }
+
+            while (start < end && !vowels.contains(chars[end] + "")) {
+                end--;
+            }
+
+            char temp = chars[start];
+            chars[start] = chars[end];
+            chars[end] = temp;
+
+            start++;
+            end--;
+        }
+        return new String(chars);
     }
 
 }
