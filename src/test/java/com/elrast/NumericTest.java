@@ -1,7 +1,11 @@
 package com.elrast;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Set;
+import java.util.TreeSet;
 
 import static org.junit.Assert.*;
 
@@ -102,5 +106,15 @@ public class NumericTest {
         assertEquals(1, numeric.factorial(1));
         assertEquals(2, numeric.factorial(2));
         assertEquals(6, numeric.factorial(3));
+    }
+
+    @Test
+    public void shouldSortRotatedInput() {
+        int[] input = {8, 9, 10, 11, 3};
+        int[] result = {1, 2, 8, 9, 10};
+        //Assert.assertEquals(input, numeric.discardRotation(input));
+        Assert.assertEquals(3, numeric.findPoint(input));
+
+
     }
 }
