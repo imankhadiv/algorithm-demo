@@ -1,7 +1,9 @@
 package com.elrast.datastructre;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class BBinaryTree<T extends Comparable<T>> {
 
@@ -190,6 +192,21 @@ public class BBinaryTree<T extends Comparable<T>> {
         List<Integer> inOrderList = new ArrayList<>();
         System.out.println(b.inOrder(b.root, inOrderList));
 
+        System.out.println("printing breathFirst...");
+        List<Integer> breathList = new ArrayList<>();
+        System.out.println(b.bFirst(b.root, breathList));
+        System.out.println(b.findHeight(b.root));
+
+
+        BBinaryTree<Integer> vahid = new BBinaryTree<>();
+        b.add(5);
+        b.add(4);
+        b.add(4);
+
+
+        int eee = vahid.longestUnivaluePath(vahid.root);
+        System.out.println(eee);
+
 
     }
 
@@ -233,4 +250,41 @@ public class BBinaryTree<T extends Comparable<T>> {
         return Integer.max(leftHeight, rightHeight) + 1;
     }
 
+    public List<Integer> bFirst(Node root, List<Integer> list) {
+        Queue<Node> queue = new LinkedList<>();
+        while (root != null) {
+            //list.add((Integer) root.getItem());
+            if (root.left != null) {
+                list.add((Integer) root.left.getItem());
+                queue.add(root.getLeft());
+            }
+            if (root.right != null) {
+                list.add((Integer) root.right.getItem());
+                System.out.println("adding to queue ->" + root.getRight().getItem());
+                queue.add(root.getRight());
+            }
+            if (!queue.isEmpty()) {
+                root = queue.remove();
+            } else {
+                root = null;
+            }
+        }
+        return list;
+    }
+
+    public int longestUnivaluePath(Node root) {
+        int leftHeight = 0;
+        int rightHeight = 0;
+        if (root == null) {
+            return 0;
+        }
+        if (root.left != null && root.left.getItem() != root.getItem()) {
+            //return ;
+
+        }
+        leftHeight = longestUnivaluePath(root.left);
+        rightHeight = longestUnivaluePath(root.right);
+        return Integer.max(leftHeight, rightHeight) + 1;
+
+    }
 }

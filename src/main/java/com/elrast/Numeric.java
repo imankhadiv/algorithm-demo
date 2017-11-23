@@ -1,5 +1,7 @@
 package com.elrast;
 
+import java.util.Arrays;
+
 public class Numeric {
 
     public boolean isPrime(int number) {
@@ -103,5 +105,35 @@ public class Numeric {
             return 1;
         }
         return number * factorial(--number);
+    }
+
+    public int[] discardRotation(int[] rotated) {
+
+        int[] result = new int[rotated.length];
+        int middle = rotated.length / 2;
+        while (middle != 0) {
+            if (rotated[middle - 1] > rotated[middle]) {
+                break;
+            } else {
+                middle = middle + rotated.length / 2;
+            }
+        }
+        for (int i = 0; i < middle; i++) {
+            result[i] = rotated[middle];
+        }
+        for (int i = middle; i < rotated.length; i++) {
+            result[i] = rotated[i - middle];
+        }
+        return result;
+    }
+    public int findPoint(int[] rotated) {
+
+        int[] result = new int[rotated.length];
+        int middle = rotated.length / 2;
+            if (rotated[middle - 1] > rotated[middle]) {
+                return rotated[middle];
+            } else {
+                return findPoint(Arrays.copyOfRange(rotated, middle, rotated.length));
+            }
     }
 }

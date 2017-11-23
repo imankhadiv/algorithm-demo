@@ -44,6 +44,13 @@ public class StringsTest {
         String second = "sdfghjkla";
 
         Assert.assertEquals('l', strings.findTheFirstMatchCharacter(first, second));
+
+    }
+    @Test
+    public void ShouldReversVowel() {
+
+        String input = "abcdio";
+        Assert.assertEquals("obcdia", strings.reverseVowelsWithTwoPointer(input));
     }
 
     @Test
