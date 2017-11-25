@@ -1,6 +1,5 @@
 package com.elrast.datastructre;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -126,6 +125,9 @@ public class BBinaryTree<T extends Comparable<T>> {
         }
     }
 
+    public Node getRoot() {
+        return root;
+    }
 
     class Node {
         private Node left;
@@ -168,46 +170,6 @@ public class BBinaryTree<T extends Comparable<T>> {
         public void setItem(T item) {
             this.item = item;
         }
-    }
-
-    public static void main(String[] args) {
-
-        BBinaryTree<Integer> b = new BBinaryTree<>();
-        b.add(23);
-        b.add(14);
-        b.add(7);
-        b.add(17);
-        b.add(31);
-        b.add(9);
-
-
-        List<Integer> postOrderList = new ArrayList<>();
-        // System.out.println(b.postOrder(b.root, list, 0));
-        System.out.println("Printing postOrder...");
-        System.out.println(b.postOrder(b.root, postOrderList));
-        //System.out.println(b.postOrder(b.root, list));
-        System.out.println("Printing preorder...");
-        List<Integer> preOrderList = new ArrayList<>();
-        System.out.println(b.preOrder(b.root, preOrderList));
-        List<Integer> inOrderList = new ArrayList<>();
-        System.out.println(b.inOrder(b.root, inOrderList));
-
-        System.out.println("printing breathFirst...");
-        List<Integer> breathList = new ArrayList<>();
-        System.out.println(b.bFirst(b.root, breathList));
-        System.out.println(b.findHeight(b.root));
-
-
-        BBinaryTree<Integer> vahid = new BBinaryTree<>();
-        b.add(5);
-        b.add(4);
-        b.add(4);
-
-
-        int eee = vahid.longestUnivaluePath(vahid.root);
-        System.out.println(eee);
-
-
     }
 
     public List postOrder(Node root, List<Integer> list) {
@@ -286,5 +248,26 @@ public class BBinaryTree<T extends Comparable<T>> {
         rightHeight = longestUnivaluePath(root.right);
         return Integer.max(leftHeight, rightHeight) + 1;
 
+    }
+
+    public int longestConsecutiveSequence(Node root, int count) {
+        int left = count;
+        int right = count;
+        if (root != null) {
+            System.out.println(root.item);
+            if (root.parent != null && (Integer) root.parent.getItem() + 1 == (Integer) root.getItem()) {
+                count++;
+            } else {
+                //max = Integer.max(count, max);
+                count = 1;
+            }
+            left = longestConsecutiveSequence(root.getLeft(), count);
+            right = longestConsecutiveSequence(root.getRight(), count);
+            if (root.parent != null) {
+                System.out.println(root.getParent().getItem() + ".....");
+            }
+
+        }
+        return Integer.max(left, right);
     }
 }
