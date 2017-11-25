@@ -53,4 +53,13 @@ public class StringsTest {
         Assert.assertEquals("obcdia", strings.reverseVowelsWithTwoPointer(input));
     }
 
+    @Test
+    public void shouldFindMatch() {
+
+        String input = "Brute force to find match";
+        String match = "match";
+
+        Assert.assertTrue(strings.findMatch(input, match));
+    }
+
 }

@@ -116,6 +116,23 @@ public class Strings {
         return 0;
     }
 
+    public boolean findMatch(String line, String match) {
+
+        int j = 0;
+        int mLength = match.length();
+        for (int i = 0; i < line.length(); i++) {
+            if (line.charAt(i) == match.charAt(j)) {
+                j++;
+                if (j == mLength) {
+                    return true;
+                }
+            } else {
+                j = 0;
+
+            }
+        }
+        return false;
+    }
 
     // Function to print all substring
     public static void SubString(String str, int n) {
