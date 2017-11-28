@@ -1,5 +1,8 @@
 package com.elrast.datastructre;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class BasicLinkedList<T> {
 
     Node first;
@@ -181,4 +184,80 @@ public class BasicLinkedList<T> {
     }
 
 
+    //// feature methods
+    @Deprecated
+    public void removeDuplicates(Node node) {
+
+        Node previous = new Node(null);
+        Set<T> set = new HashSet<>();
+        while (node != null) {
+
+            if (set.contains(node.value)) {
+                previous.nextNode = node.nextNode;
+            } else {
+                set.add(node.value);
+                previous.nextNode = node;
+            }
+            node = node.nextNode;
+        }
+        node = previous;
+    }
+
+    public void removeDuplicatesWithBuffer(Node firstNode) {
+
+        Node pointer = firstNode;
+        Set<T> set = new HashSet<>();
+        while (pointer != null) {
+            Node nextNode = pointer.nextNode;
+            if (nextNode != null) {
+                if (!set.contains(nextNode.value)) {
+                    set.add(nextNode.value);
+                } else {
+                    while (nextNode != null && set.contains(nextNode.value)) {
+                        nextNode = nextNode.nextNode;
+                        nodeCount--;
+                    }
+                    pointer.nextNode = nextNode;
+                }
+            }
+            pointer = pointer.nextNode;
+        }
+    }
+
+    public void removeDuplicateWithoutBuffer(Node firstNode) {
+        Node tmpNode = firstNode;
+        while (tmpNode != null) {
+
+            Node pointer = tmpNode;
+            Node runner = tmpNode.nextNode;
+            while (runner != null) {
+                while (runner.getValue() == (tmpNode.getValue())) {
+                    runner = runner.nextNode;
+                    nodeCount--;
+                    if (runner == null) break;
+                }
+                if (runner == null) {
+                    pointer.nextNode = null;
+                    break;
+                }
+                pointer = pointer.nextNode;
+                runner = runner.nextNode;
+            }
+            pointer.nextNode = null;
+            tmpNode = tmpNode.nextNode;
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder("");
+        Node n = first;
+        while (n != null) {
+            s.append(n.value);
+            s.append("->");
+            n = n.nextNode;
+        }
+
+        return s.subSequence(0,s.length()-2).toString();
+    }
 }

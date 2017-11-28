@@ -160,4 +160,41 @@ public class BasicLinkedListTest {
         assertTrue(basicLinkedList.find(30) == -1);
     }
 
+    @Test
+    public void shouldRemoveDuplicateNodesWithBuffer() {
+        basicLinkedList.add(0);
+        basicLinkedList.add(1);
+        basicLinkedList.add(2);
+        basicLinkedList.add(3);
+        basicLinkedList.add(4);
+        basicLinkedList.add(3);
+        basicLinkedList.add(3);
+        basicLinkedList.add(3);
+
+
+        System.out.println(basicLinkedList);
+        basicLinkedList.removeDuplicatesWithBuffer(basicLinkedList.first);
+        System.out.println(basicLinkedList);
+        assertEquals(5, basicLinkedList.size());
+
+    }
+
+    @Test
+    public void shouldRemoveDuplicateWithoutBuffer() {
+        basicLinkedList.add(0);
+        basicLinkedList.add(1);
+        basicLinkedList.add(2);
+        basicLinkedList.add(3);
+        basicLinkedList.add(4);
+        basicLinkedList.add(3);
+        basicLinkedList.add(3);
+        basicLinkedList.add(3);
+
+
+        System.out.println(basicLinkedList);
+        basicLinkedList.removeDuplicateWithoutBuffer(basicLinkedList.first);
+        System.out.println(basicLinkedList);
+        assertEquals(5, basicLinkedList.size());
+    }
+
 }
