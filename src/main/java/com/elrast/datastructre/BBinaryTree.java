@@ -1,5 +1,6 @@
 package com.elrast.datastructre;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -268,6 +269,82 @@ public class BBinaryTree<T extends Comparable<T>> {
             }
 
         }
+        return Integer.max(left, right);
+    }
+    public int longestConsecutiveSequence(Node root) {
+        int left = 1;
+        int right = 1;
+        int count = 1;
+        if (root != null) {
+            System.out.println(root.item);
+            if (root.parent != null && (Integer) root.parent.getItem() + 1 == (Integer) root.getItem()) {
+                count++;
+            } else {
+                //max = Integer.max(count, max);
+                count = 0;
+            }
+            left = count +longestConsecutiveSequence(root.getLeft(), count);
+            right = count + longestConsecutiveSequence(root.getRight(), count);
+        }
+        return Integer.max(left, right);
+    }
+
+    public List<Integer> postO(Node root, List<Integer> list) {
+
+        if (root == null) {
+            return list;
+        }
+        postO(root.getLeft(), list);
+        postO(root.getRight(), list);
+        list.add((Integer) root.getItem());
+
+        return list;
+    }
+
+    public int bfs(Node root) {
+
+        int count = -1;
+        Queue<Node> queue = new LinkedList<>();
+        while (root != null) {
+            System.out.println(root.getItem());
+            if (root.getLeft() != null) {
+                queue.add(root.getLeft());
+            }
+            if (root.getRight() != null) {
+                queue.add(root.getRight());
+            }
+            if (!queue.isEmpty()) {
+                root = queue.remove();
+                count++;
+            } else {
+                root = null;
+            }
+
+        }
+        return count;
+
+    }
+
+    public int fMax(Node root) {
+
+        int left = -1;
+        int right = -1;
+        if (root != null) {
+            left = 1 + fMax(root.getLeft());
+            right = 1 + fMax(root.getRight());
+
+        }
+        return Integer.max(left, right);
+    }
+    public int fMax2(Node root) {
+
+        int left = 0;
+        int right = 0;
+        if(root == null){
+            return -1;
+        }
+        left = 1 + fMax(root.getLeft());
+        right = 1 + fMax(root.getRight());
         return Integer.max(left, right);
     }
 }
