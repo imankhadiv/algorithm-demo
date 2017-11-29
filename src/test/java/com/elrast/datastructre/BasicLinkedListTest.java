@@ -196,5 +196,29 @@ public class BasicLinkedListTest {
         System.out.println(basicLinkedList);
         assertEquals(5, basicLinkedList.size());
     }
+    @Test
+    public void shouldFindKethNodeToEnd() {
+        basicLinkedList.add(0);
+        basicLinkedList.add(1);
+        basicLinkedList.add(2);
+        basicLinkedList.add(3);
+        basicLinkedList.add(4);
+
+        System.out.println(basicLinkedList);
+        BasicLinkedList.Node node = basicLinkedList.findKthNodeToTheEnd(basicLinkedList.first,1);
+        assertEquals(4, node.value);
+    }
+    @Test
+    public void shouldFindKethNodeToEndWithRecursiveApproach() {
+        basicLinkedList.add(0);
+        basicLinkedList.add(1);
+        basicLinkedList.add(2);
+        basicLinkedList.add(3);
+        basicLinkedList.add(4);
+
+        System.out.println(basicLinkedList);
+        BasicLinkedList.Node node = basicLinkedList.findKthNodeToTheEndWithRecursiveApproach(basicLinkedList.first,2);
+        assertEquals(3, node.value);
+    }
 
 }

@@ -248,6 +248,26 @@ public class BasicLinkedList<T> {
         }
     }
 
+    public Node findKthNodeToTheEnd(Node first, int kth) {
+        if(kth < 1){
+            throw new IllegalArgumentException("Kth must be greater than 0");
+        }
+        int i = nodeCount - kth;
+        while (i > 0) {
+            first = first.nextNode;
+            i--;
+        }
+        return first;
+    }
+    public Node findKthNodeToTheEndWithRecursiveApproach(Node first, int kth) {
+
+        if(kth == size()){
+            return first;
+        }
+        this.nodeCount--;
+        return findKthNodeToTheEndWithRecursiveApproach(first.nextNode, kth);
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("");
@@ -258,6 +278,6 @@ public class BasicLinkedList<T> {
             n = n.nextNode;
         }
 
-        return s.subSequence(0,s.length()-2).toString();
+        return s.subSequence(0, s.length() - 2).toString();
     }
 }
