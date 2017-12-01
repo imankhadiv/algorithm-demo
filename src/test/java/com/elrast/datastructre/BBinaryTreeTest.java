@@ -25,4 +25,27 @@ public class BBinaryTreeTest {
 
     }
 
+    @Test
+    public void shouldInsertSortedArrayIntoBinaryTree() {
+
+        Integer[] input = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+        BBinaryTree.Node result = app.convertSortedArrayToBinaryTreeWithMinHeight(input);
+
+        assertTrue(5 == (Integer) result.getItem());
+
+    }
+
+    @Test
+    public void shouldConvertSortedArrayToTree() {
+
+        Integer[] input = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+        BBinaryTree.Node result = app.convertSortedArrayToBinaryTree(input);
+
+        assertTrue(4 == (Integer) result.getItem());
+
+    }
+
+
 }

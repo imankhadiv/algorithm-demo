@@ -369,19 +369,41 @@ public class BBinaryTree<T extends Comparable<T>> {
         return Integer.max(left, right);
     }
 
-    public Node convertSortedArrayToBinaryTreeWithMinHeight(Integer[] sortedArray, Node root) {
+    @Deprecated
+    public Node convertSortedArrayToBinaryTreeWithMinHeight(Integer[] sortedArray) {
+
+//        Node realRoot = root;
+//        if (sortedArray.length == 1) {
+//            if (realRoot == null) root = new Node((sortedArray[0]));
+//            else if ((sortedArray[0]).compareTo((Integer) realRoot.getItem()) == 0)
+//                realRoot.setRight(new Node(sortedArray[0]));
+//            else realRoot.setLeft(new Node(sortedArray[0]));
+//            return root;
+//        } else {
+//            realRoot = convertSortedArrayToBinaryTreeWithMinHeight(Arrays.copyOfRange(sortedArray, sortedArray.length / 2, sortedArray.length), realRoot);
+//            convertSortedArrayToBinaryTreeWithMinHeight(Arrays.copyOfRange(sortedArray, 0, sortedArray.length / 2), realRoot);
+//        }
 
         if (sortedArray.length == 1) {
-            if (root == null) root = new Node((sortedArray[0]));
-            else if ((sortedArray[0]).compareTo((Integer) root.getItem()) == 0) root.setRight(new Node(sortedArray[0]));
-            else root.setLeft(new Node(sortedArray[0]));
-            return root;
-        } else {
-            convertSortedArrayToBinaryTreeWithMinHeight(Arrays.copyOfRange(sortedArray, 0, sortedArray.length / 2), root);
-            convertSortedArrayToBinaryTreeWithMinHeight(Arrays.copyOfRange(sortedArray, sortedArray.length / 2 + 1, sortedArray.length), root);
+            return new Node(sortedArray[0]);
         }
+        Node node = new Node(sortedArray[sortedArray.length / 2]);
+        node.left = convertSortedArrayToBinaryTree(Arrays.copyOfRange(sortedArray, 0, sortedArray.length / 2));
+        node.right = convertSortedArrayToBinaryTree(Arrays.copyOfRange(sortedArray, sortedArray.length / 2 + 1, sortedArray.length));
+        return node;
+    }
 
-        return root;
+    public Node convertSortedArrayToBinaryTree(Integer[] sortedArray) {
+        return convertSortedArrayToBinaryTree(sortedArray, 0, sortedArray.length - 1);
+    }
 
+    private Node convertSortedArrayToBinaryTree(Integer[] sortedArray, int start, int end) {
+
+        if (end < start) return null;
+        int mid = (start + end) / 2;
+        Node node = new Node(sortedArray[mid]);
+        node.left = convertSortedArrayToBinaryTree(sortedArray, start, mid - 1);
+        node.right = convertSortedArrayToBinaryTree(sortedArray, mid + 1, end);
+        return node;
     }
 }
