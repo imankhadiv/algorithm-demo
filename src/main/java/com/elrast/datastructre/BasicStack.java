@@ -44,4 +44,15 @@ public class BasicStack<T> {
         }
         throw new IllegalArgumentException("Can not find item on the stack" + item);
     }
+
+    public int size() {
+        return stackPointer;
+    }
+
+    public T peek() {
+        if (stackPointer <= 0) {
+            throw new IllegalStateException("No more items on the stack!");
+        }
+        return data[stackPointer];
+    }
 }
