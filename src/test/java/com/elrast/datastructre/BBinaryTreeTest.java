@@ -20,9 +20,7 @@ class BBinaryTreeTest {
         app.add(19);
         app.add(20);
         app.add(21);
-
-        System.out.println(app.longestConsecutiveSequence(app.getRoot(),1));
-
+        assertTrue(3 == app.longestConsecutiveSequence(app.getRoot(),1));
     }
 
 }

@@ -1,8 +1,6 @@
 package com.elrast.datastructre;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BBinaryTree<T extends Comparable<T>> {
 
@@ -254,7 +252,6 @@ public class BBinaryTree<T extends Comparable<T>> {
         int left = count;
         int right = count;
         if (root != null) {
-            System.out.println(root.item);
             if (root.parent != null && (Integer) root.parent.getItem() + 1 == (Integer) root.getItem()) {
                 count++;
             } else {
@@ -263,11 +260,31 @@ public class BBinaryTree<T extends Comparable<T>> {
             }
             left = longestConsecutiveSequence(root.getLeft(), count);
             right = longestConsecutiveSequence(root.getRight(), count);
-            if (root.parent != null) {
-                System.out.println(root.getParent().getItem() + ".....");
-            }
-
         }
         return Integer.max(left, right);
+    }
+
+    public int dfsHeight(Node root) {
+
+        if (root == null) return 0;
+        int leftHeight = dfsHeight(root.left);
+        if (leftHeight == -1) return -1;
+        int rightHeight = dfsHeight(root.right);
+        if (rightHeight == -1) return -1;
+        if (Math.abs(leftHeight - rightHeight) > 1) return -1;
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    public boolean isBalanced(Node node) {
+        return dfsHeight(node) != -1;
+    }
+
+    public List<Integer> findSecondGreatestNode(Node root, List<Integer> list) {
+
+        if (root != null) {
+            findSecondGreatestNode(root.getRight(), list);
+            list.add((Integer) root.item);
+        }
+        return list;
     }
 }
