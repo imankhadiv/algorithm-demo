@@ -46,6 +46,7 @@ public class StringsTest {
         Assert.assertEquals('l', strings.findTheFirstMatchCharacter(first, second));
 
     }
+
     @Test
     public void ShouldReversVowel() {
 
@@ -60,6 +61,30 @@ public class StringsTest {
         String match = "match";
 
         Assert.assertTrue(strings.findMatch(input, match));
+    }
+
+    @Test
+    public void shouldReplaceSpaceWithTwentyPercent() {
+
+        String input = "a bc ";
+        char[] result = {'a', '%', '2', '0', 'b', 'c', '%', '2', '0'};
+        System.out.println(strings.replaceSpaceWithPercentTwenty(input));
+        Assert.assertTrue(result == strings.replaceSpaceWithPercentTwenty(input));
+    }
+
+    @Test
+    public void shouldCompressString() {
+
+        String input = "aabcccccaaa";
+        String result = "a2b1c5a3";
+        Assert.assertEquals(result, strings.compressString(input));
+    }
+    @Test
+    public void shouldNotCompressTheString() {
+
+        String input = "abcde";
+        String result = "abcde";
+        Assert.assertEquals(result, strings.compressString(input));
     }
 
 }

@@ -1,9 +1,6 @@
 package com.elrast;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class Strings {
 
@@ -207,4 +204,46 @@ public class Strings {
         return new String(chars);
     }
 
+
+    public char[] replaceSpaceWithPercentTwenty(String input) {
+
+        int spaceCount = 0;
+
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == ' ') spaceCount++;
+        }
+        int totalCharArraySize = input.length() + spaceCount * 2;
+        char[] chars = new char[totalCharArraySize];
+        for (int i = input.length() - 1; i >= 0; i--) {
+            char ch = input.charAt(i);
+            if (ch == ' ') {
+                chars[--totalCharArraySize] = '0';
+                chars[--totalCharArraySize] = '2';
+                chars[--totalCharArraySize] = '%';
+            } else {
+                chars[--totalCharArraySize] = ch;
+            }
+        }
+        return chars;
+    }
+
+    public String compressString(String input) {
+
+        int length = input.length();
+        StringBuffer sb = new StringBuffer();
+        int j = 1;
+        for (int i = 0; i < input.length() - 1; i++) {
+
+            char ch = input.charAt(i);
+            if (ch == input.charAt(i + 1)) {
+                j++;
+            } else {
+                sb.append(ch).append(j);
+                j = 1;
+            }
+        }
+        if(j > 1) sb.append(input.charAt(length -1)).append(j);
+        String compressedString = sb.toString();
+        return compressedString.length() > length ? input : compressedString;
+    }
 }
