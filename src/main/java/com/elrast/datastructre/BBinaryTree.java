@@ -1,5 +1,6 @@
 package com.elrast.datastructre;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -129,7 +130,7 @@ public class BBinaryTree<T extends Comparable<T>> {
         return root;
     }
 
-    class Node {
+    class Node<T extends Comparable<T>> {
         private Node left;
         private Node right;
         private Node parent;
@@ -366,5 +367,21 @@ public class BBinaryTree<T extends Comparable<T>> {
         left = 1 + fMax(root.getLeft());
         right = 1 + fMax(root.getRight());
         return Integer.max(left, right);
+    }
+
+    public Node convertSortedArrayToBinaryTreeWithMinHeight(Integer[] sortedArray, Node root) {
+
+        if (sortedArray.length == 1) {
+            if (root == null) root = new Node((sortedArray[0]));
+            else if ((sortedArray[0]).compareTo((Integer) root.getItem()) == 0) root.setRight(new Node(sortedArray[0]));
+            else root.setLeft(new Node(sortedArray[0]));
+            return root;
+        } else {
+            convertSortedArrayToBinaryTreeWithMinHeight(Arrays.copyOfRange(sortedArray, 0, sortedArray.length / 2), root);
+            convertSortedArrayToBinaryTreeWithMinHeight(Arrays.copyOfRange(sortedArray, sortedArray.length / 2 + 1, sortedArray.length), root);
+        }
+
+        return root;
+
     }
 }
