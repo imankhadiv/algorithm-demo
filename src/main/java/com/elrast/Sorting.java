@@ -190,8 +190,8 @@ public class Sorting {
         System.out.println(map);
         String[] result = new String[input.length];
         int index = 0;
-        for (List<String> vals: map.values()){
-            for (String item: vals){
+        for (List<String> vals : map.values()) {
+            for (String item : vals) {
                 result[index++] = item;
             }
         }
@@ -202,6 +202,34 @@ public class Sorting {
         char[] chars = word.toCharArray();
         Arrays.sort(chars);
         return new String(chars);
+    }
+
+    public int findItemInReturnedSortedInput(int[] input, int item) {
+
+        int start = 0;
+        int end = input.length - 1;
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            if (input[mid] == item) return mid;
+            else if (input[start] <= input[mid]) {
+                if (item > input[start] && item < input[mid]) {
+                    end = mid - 1;
+                } else if (input[start] == item) {
+                    return start;
+                } else {
+                    start = mid + 1;
+                }
+            } else {
+                if (item > input[mid] && item < input[end]) {
+                    start = mid + 1;
+                } else if (input[end] == item) {
+                    return end;
+                } else {
+                    end = mid - 1;
+                }
+            }
+        }
+        return -1;
     }
 
 }

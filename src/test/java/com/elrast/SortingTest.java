@@ -5,8 +5,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class SortingTest {
 
@@ -76,6 +75,29 @@ public class SortingTest {
         String[] input = {"ab", "iceman", "b", "cinema", "ba"};
         String[] result = {"ab", "ba", "iceman", "cinema", "b"};
         assertArrayEquals(result, sorting.makeAnagramSort(input));
+    }
+
+    @Test
+    public void shouldFindItemInTheReversedSortedInput() {
+
+        int item = 2;
+        int[] input = {8, 9, 1, 2, 3};
+        assertEquals(3, sorting.findItemInReturnedSortedInput(input, item));
+        int[] input2 = {10, 15, 20, 0, 5};
+        item = 5;
+        assertEquals(4, sorting.findItemInReturnedSortedInput(input2, item));
+        int[] input3 = {50, 5, 20, 30, 40};
+        assertEquals(1, sorting.findItemInReturnedSortedInput(input3, item));
+
+    }
+
+    @Test
+    public void shouldFindItemWhenThereIsDuplicate() {
+
+        int item = 3;
+        int[] input = {2, 2, 2, 3, 4, 2};
+        assertEquals(3, sorting.findItemInReturnedSortedInput(input, item));
+
     }
 
 }
