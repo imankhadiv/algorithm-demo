@@ -126,14 +126,26 @@ public class Numeric {
         }
         return result;
     }
+
     public int findPoint(int[] rotated) {
 
         int[] result = new int[rotated.length];
         int middle = rotated.length / 2;
-            if (rotated[middle - 1] > rotated[middle]) {
-                return rotated[middle];
-            } else {
-                return findPoint(Arrays.copyOfRange(rotated, middle, rotated.length));
-            }
+        if (rotated[middle - 1] > rotated[middle]) {
+            return rotated[middle];
+        } else {
+            return findPoint(Arrays.copyOfRange(rotated, middle, rotated.length));
+        }
+    }
+
+    public int findMissingNumberInRange(int[] input) {
+        int sum = 0;
+        for (int i = 0; i < 100; i++) {
+            sum += i;
+        }
+        for (int i = 0; i < input.length; i++) {
+            sum -= input[i];
+        }
+        return sum;
     }
 }

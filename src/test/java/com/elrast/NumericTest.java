@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 
@@ -115,6 +116,11 @@ public class NumericTest {
         //Assert.assertEquals(input, numeric.discardRotation(input));
         Assert.assertEquals(3, numeric.findPoint(input));
 
+    }
 
+    @Test
+    public void shouldFindMissingNumber() {
+        int[] input = IntStream.rangeClosed(2, 100).toArray();
+        assertEquals(1, numeric.findPoint(input));
     }
 }

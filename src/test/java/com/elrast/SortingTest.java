@@ -61,12 +61,21 @@ public class SortingTest {
         int[] result = sorting.insertionSort(input);
         assertArrayEquals(sorted, result);
     }
+
     @Test
     public void shellSortTest() {
 
         int[] sorted = new int[]{0, 2, 5, 18, 33};
         int[] result = sorting.shellSort(input);
         assertArrayEquals(sorted, result);
+    }
+
+    @Test
+    public void shouldMakeAnagramSort() {
+
+        String[] input = {"ab", "iceman", "b", "cinema", "ba"};
+        String[] result = {"ab", "ba", "iceman", "cinema", "b"};
+        assertArrayEquals(result, sorting.makeAnagramSort(input));
     }
 
 }

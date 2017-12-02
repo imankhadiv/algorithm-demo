@@ -1,7 +1,7 @@
 package com.elrast;
 
 
-import java.util.Arrays;
+import java.util.*;
 
 public class Sorting {
 
@@ -171,6 +171,37 @@ public class Sorting {
             gap /= 2;
         }
         return input;
+    }
+
+    public String[] makeAnagramSort(String[] input) {
+
+        Map<String, List<String>> map = new LinkedHashMap<>();
+        for (String item : input) {
+
+            String sortedString = sortCharsInString(item);
+            if (map.containsKey(sortedString)) {
+                map.get(sortedString).add(item);
+            } else {
+                List<String> list = new ArrayList<>();
+                list.add(item);
+                map.put(sortedString, list);
+            }
+        }
+        System.out.println(map);
+        String[] result = new String[input.length];
+        int index = 0;
+        for (List<String> vals: map.values()){
+            for (String item: vals){
+                result[index++] = item;
+            }
+        }
+        return result;
+    }
+
+    private String sortCharsInString(String word) {
+        char[] chars = word.toCharArray();
+        Arrays.sort(chars);
+        return new String(chars);
     }
 
 }
