@@ -1,9 +1,6 @@
 package com.elrast.datastructre;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BBinaryTree<T extends Comparable<T>> {
 
@@ -405,5 +402,27 @@ public class BBinaryTree<T extends Comparable<T>> {
         node.left = convertSortedArrayToBinaryTree(sortedArray, start, mid - 1);
         node.right = convertSortedArrayToBinaryTree(sortedArray, mid + 1, end);
         return node;
+    }
+
+    public List<LinkedList<Node>> putNodesInTheSameLevelToLinkedList(Node root) {
+        List<LinkedList<Node>> list = new ArrayList<>();
+        LinkedList<Node> current = new LinkedList<>();
+        if (root != null) {
+            current.push(root);
+        }
+        while (!current.isEmpty()) {
+            list.add(current);
+            LinkedList<Node> parents = current;
+            current = new LinkedList<>();
+            for (Node node : parents) {
+                if (node.getLeft() != null) {
+                    current.push(node.getLeft());
+                }
+                if (node.getRight() != null) {
+                    current.push(node.getRight());
+                }
+            }
+        }
+        return list;
     }
 }
