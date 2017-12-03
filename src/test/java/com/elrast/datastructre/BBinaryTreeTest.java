@@ -65,5 +65,18 @@ public class BBinaryTreeTest {
 
     }
 
+    @Test
+    public void shouldReturnTrueIfBinarySearchIsBinaryTreeSearch() {
+
+        app.add(20);
+        app.add(30);
+        app.add(10);
+        assertTrue(app.isBinaryTreeABinarySearchTree(app.getRoot()));
+
+
+
+    }
+
+
 
 }

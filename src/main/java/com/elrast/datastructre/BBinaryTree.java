@@ -425,4 +425,48 @@ public class BBinaryTree<T extends Comparable<T>> {
         }
         return list;
     }
+
+    public boolean isBinaryTreeABinarySearchTree(Node<Integer> root) {
+
+        return checkIfOrdered(isBinaryTreeABinarySearchTree(root, new ArrayList<Integer>()));
+    }
+
+    private boolean checkIfOrdered(List<Integer> list) {
+
+        for (int i = 0; i < list.size() - 1; i++) {
+            if (list.get(i).compareTo(list.get(i + 1)) > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private List<Integer> isBinaryTreeABinarySearchTree(Node<Integer> root, List<Integer> list) {
+
+        if (root != null) {
+            isBinaryTreeABinarySearchTree(root.getLeft(), list);
+            list.add(root.getItem());
+            isBinaryTreeABinarySearchTree(root.getRight(), list);
+        }
+        return list;
+    }
+
+    public boolean checkIfValidBTreeSearch(Node root) {
+
+        return checkIfValidBTreeSearch(root, null, null);
+    }
+
+    // min max approach!
+    private boolean checkIfValidBTreeSearch(Node root, Integer min, Integer max) {
+
+        if (root == null) return true;
+        if ((min != null && 1 != root.getItem().compareTo(min)) || (max != null && root.getItem().compareTo(max) > 0))
+            return false;
+        if (checkIfValidBTreeSearch(root.getLeft(), min, (Integer) root.getItem()) || checkIfValidBTreeSearch(root.getRight(),
+                (Integer) root.getItem(), max)) return false;
+        return true;
+    }
+}
+
+
 }
