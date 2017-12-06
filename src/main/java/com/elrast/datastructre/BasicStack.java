@@ -53,6 +53,6 @@ public class BasicStack<T> {
         if (stackPointer <= 0) {
             throw new IllegalStateException("No more items on the stack!");
         }
-        return data[stackPointer];
+        return data[stackPointer-1];
     }
 }
