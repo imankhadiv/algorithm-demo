@@ -104,7 +104,7 @@ public class BasicLinkedListTest {
     public void shouldModifyFirstWhenRemovingFirstNode() {
         basicLinkedList.add(0);
         basicLinkedList.add(1);
-        Integer value = basicLinkedList.removeAt(0);
+        Integer value = basicLinkedList.removeAt2(0);
 
         assertTrue(basicLinkedList.first.getValue() == 1);
         assertTrue(value == 0);
