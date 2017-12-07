@@ -15,7 +15,7 @@ public class BBinaryTreeTest {
     }
 
     @Test
-    public void longestConsecutiveSequence() {
+    void longestConsecutiveSequence() {
 
         app.add(50);
         app.add(19);
