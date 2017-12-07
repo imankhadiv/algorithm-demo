@@ -7,13 +7,10 @@ public class AddBinary {
         if ((a == null || a.isEmpty()) && (b == null || b.isEmpty())) return "";
         if (a == null || a.isEmpty()) return b;
         if (b == null || b.isEmpty()) return a;
-
-
         int aIdx = a.length() - 1;
         int bIdx = b.length() - 1;
         int sum = 0;
         String result = "";
-        int carrier;
 
         while (aIdx >= 0 || bIdx >= 0 || sum == 1) {
 
