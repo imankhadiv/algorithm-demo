@@ -5,8 +5,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class SortingTest {
 
@@ -61,12 +60,47 @@ public class SortingTest {
         int[] result = sorting.insertionSort(input);
         assertArrayEquals(sorted, result);
     }
+
     @Test
     public void shellSortTest() {
 
         int[] sorted = new int[]{0, 2, 5, 18, 33};
         int[] result = sorting.shellSort(input);
         assertArrayEquals(sorted, result);
+    }
+
+    @Test
+    public void shouldMakeAnagramSort() {
+
+        String[] input = {"ab", "iceman", "b", "cinema", "ba"};
+        String[] result = {"ab", "ba", "iceman", "cinema", "b"};
+        assertArrayEquals(result, sorting.makeAnagramSort(input));
+    }
+
+    @Test
+    public void shouldFindItemInTheReversedSortedInput() {
+
+        int item = 2;
+        int[] input = {8, 9, 1, 2, 3};
+        assertEquals(3, sorting.findItemInReturnedSortedInputWithRecursion(input, item));
+        int[] input2 = {10, 15, 20, 0, 5};
+        item = 5;
+        assertEquals(4, sorting.findItemInReturnedSortedInput(input2, item));
+        assertEquals(4, sorting.findItemInReturnedSortedInputWithRecursion(input2, item));
+        int[] input3 = {50, 5, 20, 30, 40};
+        assertEquals(1, sorting.findItemInReturnedSortedInput(input3, item));
+       // assertEquals(1, sorting.findItemInReturnedSortedInputWithRecursion(input3, item));
+
+    }
+
+    @Test
+    public void shouldFindItemWhenThereIsDuplicate() {
+
+        int item = 5;
+        int[] input = {2, 2, 2, 3, 5, 2};
+        //assertEquals(3, sorting.findItemInReturnedSortedInput(input, item));
+        assertEquals(4, sorting.findItemInReturnedSortedInputWithRecursion(input, item));
+
     }
 
 }

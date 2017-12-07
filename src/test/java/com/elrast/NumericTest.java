@@ -4,8 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 
@@ -115,6 +114,19 @@ public class NumericTest {
         //Assert.assertEquals(input, numeric.discardRotation(input));
         Assert.assertEquals(3, numeric.findPoint(input));
 
-
     }
+
+    @Test
+    public void shouldFindMissingNumber() {
+        int[] input = IntStream.rangeClosed(2, 100).toArray();
+        assertEquals(1, numeric.findPoint(input));
+    }
+
+    @Test
+    public void shouldConvertReleventRowAndColToZero() {
+
+        int[][] input = {{1, 3, 5}, {7, 0, 6}, {8, 9, 10}};
+        numeric.convertReleventRowAndColToZero(input);
+    }
+
 }

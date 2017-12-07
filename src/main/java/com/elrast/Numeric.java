@@ -126,14 +126,60 @@ public class Numeric {
         }
         return result;
     }
+
     public int findPoint(int[] rotated) {
 
         int[] result = new int[rotated.length];
         int middle = rotated.length / 2;
-            if (rotated[middle - 1] > rotated[middle]) {
-                return rotated[middle];
-            } else {
-                return findPoint(Arrays.copyOfRange(rotated, middle, rotated.length));
+        if (rotated[middle - 1] > rotated[middle]) {
+            return rotated[middle];
+        } else {
+            return findPoint(Arrays.copyOfRange(rotated, middle, rotated.length));
+        }
+    }
+
+    public int findMissingNumberInRange(int[] input) {
+        int sum = 0;
+        for (int i = 0; i < 100; i++) {
+            sum += i;
+        }
+        for (int i = 0; i < input.length; i++) {
+            sum -= input[i];
+        }
+        return sum;
+    }
+
+    public int[][] convertReleventRowAndColToZero(int[][] input) {
+
+        printMatrix(input);
+        boolean included = false;
+        for (int i = 0; i < input.length; i++) {
+            for (int j = 0; j < input[0].length; j++) {
+                if(input[i][j] == 0) {
+                    input[i][0] = 0;
+                    input[0][j] = 0;
+                }
             }
+        }
+        System.out.println("........");
+        for (int i = 0; i < input.length; i++) {
+            if (input[i][0] == 0) {
+                for (int j = 0; j < input[0].length; j++) {
+                    input[i][j] = 0;
+                }
+            }
+        }
+        printMatrix(input);
+
+        return input;
+    }
+
+    private void printMatrix(int[][] input) {
+        for (int i = 0; i < input.length; i++) {
+            for (int j = 0; j < input[0].length; j++) {
+                System.out.print(input[i][j] + "\t");
+            }
+            System.out.println();
+        }
     }
 }

@@ -1,7 +1,7 @@
 package com.elrast;
 
 
-import java.util.Arrays;
+import java.util.*;
 
 public class Sorting {
 
@@ -173,6 +173,88 @@ public class Sorting {
         return input;
     }
 
+    public String[] makeAnagramSort(String[] input) {
+
+        Map<String, List<String>> map = new LinkedHashMap<>();
+        for (String item : input) {
+
+            String sortedString = sortCharsInString(item);
+            if (map.containsKey(sortedString)) {
+                map.get(sortedString).add(item);
+            } else {
+                List<String> list = new ArrayList<>();
+                list.add(item);
+                map.put(sortedString, list);
+            }
+        }
+        System.out.println(map);
+        String[] result = new String[input.length];
+        int index = 0;
+        for (List<String> vals : map.values()) {
+            for (String item : vals) {
+                result[index++] = item;
+            }
+        }
+        return result;
+    }
+
+    private String sortCharsInString(String word) {
+        char[] chars = word.toCharArray();
+        Arrays.sort(chars);
+        return new String(chars);
+    }
+
+    public int findItemInReturnedSortedInput(int[] input, int item) {
+
+        int start = 0;
+        int end = input.length - 1;
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            if (input[mid] == item) return mid;
+            else if (input[start] <= input[mid]) {
+                if (item > input[start] && item < input[mid]) {
+                    end = mid - 1;
+                } else if (input[start] == item) {
+                    return start;
+                } else {
+                    start = mid + 1;
+                }
+            } else {
+                if (item > input[mid] && item < input[end]) {
+                    start = mid + 1;
+                } else if (input[end] == item) {
+                    return end;
+                } else {
+                    end = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public int findItemInReturnedSortedInputWithRecursion(int[] input, int item) {
+
+        return findItemInReturnedSortedInputWithRecursion(input, item, 0, input.length - 1);
+    }
+
+    private int findItemInReturnedSortedInputWithRecursion(int[] input, int item, int start, int end) {
+
+        if (end < start) return -1;
+        int mid = (start + end) / 2;
+        if (input[mid] == item) return mid;
+        if (input[start] < input[mid] && item < input[mid]) {
+            return findItemInReturnedSortedInputWithRecursion(input, item, 0, mid - 1);
+        } else if (input[start] < input[mid] && item > input[mid]) {
+            return findItemInReturnedSortedInputWithRecursion(input, item, mid + 1, end);
+        } else if (input[start] > input[mid]) {
+            if (item > input[mid] && item <= input[start]) {
+                return findItemInReturnedSortedInputWithRecursion(input, item, mid + 1, end);
+            } else {
+                return findItemInReturnedSortedInputWithRecursion(input, item, start, mid - 1);
+            }
+        }
+        return -1;
+    }
 }
 
 

@@ -1,9 +1,6 @@
 package com.elrast.datastructre;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BBinaryTree<T extends Comparable<T>> {
 
@@ -369,19 +366,105 @@ public class BBinaryTree<T extends Comparable<T>> {
         return Integer.max(left, right);
     }
 
-    public Node convertSortedArrayToBinaryTreeWithMinHeight(Integer[] sortedArray, Node root) {
+    @Deprecated
+    public Node convertSortedArrayToBinaryTreeWithMinHeight(Integer[] sortedArray) {
+
+//        Node realRoot = root;
+//        if (sortedArray.length == 1) {
+//            if (realRoot == null) root = new Node((sortedArray[0]));
+//            else if ((sortedArray[0]).compareTo((Integer) realRoot.getItem()) == 0)
+//                realRoot.setRight(new Node(sortedArray[0]));
+//            else realRoot.setLeft(new Node(sortedArray[0]));
+//            return root;
+//        } else {
+//            realRoot = convertSortedArrayToBinaryTreeWithMinHeight(Arrays.copyOfRange(sortedArray, sortedArray.length / 2, sortedArray.length), realRoot);
+//            convertSortedArrayToBinaryTreeWithMinHeight(Arrays.copyOfRange(sortedArray, 0, sortedArray.length / 2), realRoot);
+//        }
 
         if (sortedArray.length == 1) {
-            if (root == null) root = new Node((sortedArray[0]));
-            else if ((sortedArray[0]).compareTo((Integer) root.getItem()) == 0) root.setRight(new Node(sortedArray[0]));
-            else root.setLeft(new Node(sortedArray[0]));
-            return root;
-        } else {
-            convertSortedArrayToBinaryTreeWithMinHeight(Arrays.copyOfRange(sortedArray, 0, sortedArray.length / 2), root);
-            convertSortedArrayToBinaryTreeWithMinHeight(Arrays.copyOfRange(sortedArray, sortedArray.length / 2 + 1, sortedArray.length), root);
+            return new Node(sortedArray[0]);
         }
+        Node node = new Node(sortedArray[sortedArray.length / 2]);
+        node.left = convertSortedArrayToBinaryTree(Arrays.copyOfRange(sortedArray, 0, sortedArray.length / 2));
+        node.right = convertSortedArrayToBinaryTree(Arrays.copyOfRange(sortedArray, sortedArray.length / 2 + 1, sortedArray.length));
+        return node;
+    }
 
-        return root;
+    public Node convertSortedArrayToBinaryTree(Integer[] sortedArray) {
+        return convertSortedArrayToBinaryTree(sortedArray, 0, sortedArray.length - 1);
+    }
 
+    private Node convertSortedArrayToBinaryTree(Integer[] sortedArray, int start, int end) {
+
+        if (end < start) return null;
+        int mid = (start + end) / 2;
+        Node node = new Node(sortedArray[mid]);
+        node.left = convertSortedArrayToBinaryTree(sortedArray, start, mid - 1);
+        node.right = convertSortedArrayToBinaryTree(sortedArray, mid + 1, end);
+        return node;
+    }
+
+    public List<LinkedList<Node>> putNodesInTheSameLevelToLinkedList(Node root) {
+        List<LinkedList<Node>> list = new ArrayList<>();
+        LinkedList<Node> current = new LinkedList<>();
+        if (root != null) {
+            current.push(root);
+        }
+        while (!current.isEmpty()) {
+            list.add(current);
+            LinkedList<Node> parents = current;
+            current = new LinkedList<>();
+            for (Node node : parents) {
+                if (node.getLeft() != null) {
+                    current.push(node.getLeft());
+                }
+                if (node.getRight() != null) {
+                    current.push(node.getRight());
+                }
+            }
+        }
+        return list;
+    }
+
+    public boolean isBinaryTreeABinarySearchTree(Node<Integer> root) {
+
+        return checkIfOrdered(isBinaryTreeABinarySearchTree(root, new ArrayList<Integer>()));
+    }
+
+    private boolean checkIfOrdered(List<Integer> list) {
+
+        for (int i = 0; i < list.size() - 1; i++) {
+            if (list.get(i).compareTo(list.get(i + 1)) > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private List<Integer> isBinaryTreeABinarySearchTree(Node<Integer> root, List<Integer> list) {
+
+        if (root != null) {
+            isBinaryTreeABinarySearchTree(root.getLeft(), list);
+            list.add(root.getItem());
+            isBinaryTreeABinarySearchTree(root.getRight(), list);
+        }
+        return list;
+    }
+
+    public boolean checkIfValidBTreeSearch(Node root) {
+
+        return checkIfValidBTreeSearch(root, null, null);
+    }
+
+    // min max approach!
+    private boolean checkIfValidBTreeSearch(Node root, Integer min, Integer max) {
+
+        if (root == null) return true;
+        if ((min != null && 1 != root.getItem().compareTo(min)) || (max != null && root.getItem().compareTo(max) > 0))
+            return false;
+        if (checkIfValidBTreeSearch(root.getLeft(), min, (Integer) root.getItem()) || checkIfValidBTreeSearch(root.getRight(),
+                (Integer) root.getItem(), max)) return false;
+        return true;
     }
 }
+
