@@ -221,4 +221,24 @@ public class BasicLinkedListTest {
         assertEquals(3, node.value);
     }
 
+
+    @Test
+    public void mergeTwoSortedList() {
+        basicLinkedList.add(0);
+        basicLinkedList.add(2);
+        basicLinkedList.add(4);
+
+        BasicLinkedList<Integer> secondBasicList = new BasicLinkedList<>();
+        secondBasicList.add(1);
+        secondBasicList.add(3);
+
+
+        System.out.println(basicLinkedList);
+        System.out.println(secondBasicList);
+        BasicLinkedList.Node node = basicLinkedList.mergeTwoSortedNode(basicLinkedList.first, secondBasicList.first);
+        assertEquals(5, basicLinkedList.size());
+        System.out.println(node);
+        System.out.println(basicLinkedList.first.nextNode);
+    }
+
 }

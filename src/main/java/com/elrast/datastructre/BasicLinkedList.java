@@ -160,6 +160,7 @@ public class BasicLinkedList<T> {
         return -1;
     }
 
+
     public class Node {
 
         T value;
@@ -180,6 +181,11 @@ public class BasicLinkedList<T> {
 
         public void setNextNode(Node node) {
             this.nextNode = node;
+        }
+
+        @Override
+        public String toString() {
+            return value.toString();
         }
     }
 
@@ -249,7 +255,7 @@ public class BasicLinkedList<T> {
     }
 
     public Node findKthNodeToTheEnd(Node first, int kth) {
-        if(kth < 1){
+        if (kth < 1) {
             throw new IllegalArgumentException("Kth must be greater than 0");
         }
         int i = nodeCount - kth;
@@ -259,13 +265,26 @@ public class BasicLinkedList<T> {
         }
         return first;
     }
+
     public Node findKthNodeToTheEndWithRecursiveApproach(Node first, int kth) {
 
-        if(kth == size()){
+        if (kth == size()) {
             return first;
         }
         this.nodeCount--;
         return findKthNodeToTheEndWithRecursiveApproach(first.nextNode, kth);
+    }
+
+    public Node mergeTwoSortedNode(Node first, Node second) {
+        if (first == null) return second;
+        if (second == null) return first;
+        if ((Integer) first.getValue() < (Integer) second.value) {
+            first.nextNode = mergeTwoSortedNode(first.nextNode, second);
+            return first;
+        } else {
+            second.nextNode = mergeTwoSortedNode(first, second.nextNode);
+            return second;
+        }
     }
 
     @Override
