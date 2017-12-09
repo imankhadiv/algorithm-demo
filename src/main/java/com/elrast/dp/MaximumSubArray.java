@@ -1,6 +1,6 @@
-package com.elrast;
+package com.elrast.dp;
 
-public class Dynamic {
+public class MaximumSubArray {
 
     public int maxSubArray(int[] nums) {
 

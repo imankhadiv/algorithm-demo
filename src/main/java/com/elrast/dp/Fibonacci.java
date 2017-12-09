@@ -1,4 +1,4 @@
-package com.elrast;
+package com.elrast.dp;
 
 public class Fibonacci {
 
@@ -16,13 +16,8 @@ public class Fibonacci {
             fibCache[n] = 1;
         }
         if (fibCache[n] == 0) {
-            fibCache[n] = fibonacci(n - 1) + fibonacci(n - 2);
+            fibCache[n] = cacheFibonacci(n - 1) + cacheFibonacci(n - 2);
         }
         return fibCache[n];
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println(cacheFibonacci(50));
     }
 }
